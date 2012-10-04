@@ -1,5 +1,6 @@
 #!/bin/bash
 set -x
+exec 2>/tmp/$$.log
 
 DB="sqlite3 /var/lib/one/one.db"
 
@@ -9,7 +10,12 @@ function dbq
 }
 
 #dbq "select oid from vm_pool where state = 1 or state = 3 and name like 'one-%';" | while read oid
-dbq "select oid from vm_pool where name like 'one-%';" | while read oid
+( if [ -n "$1" ]
+then
+	echo "$1"
+else
+	dbq "select oid from vm_pool where name like 'one-%';"
+fi )| while read oid
 do
 	dbq "select name from vm_pool where oid = $oid;"| sed -e "s/^/DEBUG:/"
 	dbq "select body from vm_pool where oid = $oid;"| sed -e "s/^/DEBUG:/"
