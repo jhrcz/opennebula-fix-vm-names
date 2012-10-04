@@ -60,8 +60,10 @@ else
 	dbq "select oid from vm_pool where name like 'one-%';"
 fi )| while read oid
 do
-	qdebug && dbq "select name from vm_pool where oid = $oid;"| sed -e "s/^/DEBUG:/"
-	qdebug && dbq "select body from vm_pool where oid = $oid;"| sed -e "s/^/DEBUG:/"
+	qdebug && \
+		dbq "select name from vm_pool where oid = $oid;" | sed -e "s/^/DEBUG:/"
+	qdebug && \
+		dbq "select body from vm_pool where oid = $oid;" | sed -e "s/^/DEBUG:/"
 
 	case $newname_source in
 
