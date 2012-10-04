@@ -9,6 +9,11 @@
 # The second case is useful for use as a VM_HOOK to automagicaly
 # set VM names.
 #
+# Name could be detected from template name or primary os volume name
+#
+# After script is run, it's required to restart oned daemon,
+# to not have old vm name cached.
+#
 ######################################################################
 
 # function for simple debugging condition
