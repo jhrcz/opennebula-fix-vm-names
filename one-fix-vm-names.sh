@@ -40,6 +40,9 @@ DB="sqlite3 /var/lib/one/one.db"
 # possible values: template / osvolume
 newname_source=template
 
+# rename only vms with specific prefix
+oldname_prefix="one-"
+
 ######################################################################
 # END CONFIGURATION
 ######################################################################
@@ -57,7 +60,7 @@ then
 else
 	# 6=done, 7=failed
 	#dbq "select oid from vm_pool where state not in  ( 6, 7 ) and name like 'one-%';"
-	dbq "select oid from vm_pool where name like 'one-%';"
+	dbq "select oid from vm_pool where name like '${oldname_prefix}%';"
 fi )| while read oid
 do
 	qdebug && \
