@@ -13,11 +13,12 @@ function dbq
   echo "$1" | $DB
 }
 
-#dbq "select oid from vm_pool where state = 1 or state = 3 and name like 'one-%';" | while read oid
 ( if [ -n "$1" ]
 then
 	echo "$1"
 else
+	# 6=done, 7=failed
+	#dbq "select oid from vm_pool where state not in  ( 6, 7 ) and name like 'one-%';"
 	dbq "select oid from vm_pool where name like 'one-%';"
 fi )| while read oid
 do
