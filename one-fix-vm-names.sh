@@ -1,6 +1,10 @@
 #!/bin/bash
-set -x
-exec 2>/tmp/$$.log
+
+if [ "$DEBUG" = "YES" ]
+then
+	set -x
+	exec 2>/tmp/debug-$$.log
+if
 
 DB="sqlite3 /var/lib/one/one.db"
 
