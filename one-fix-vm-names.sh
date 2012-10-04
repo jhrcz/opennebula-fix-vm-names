@@ -1,5 +1,16 @@
 #!/bin/bash
 
+######################################################################
+#
+# Renames opennebula VMs to detected name
+# depending on configuration
+#
+# Script operates on all "live" VMs or on one define by argument.
+# The second case is useful for use as a VM_HOOK to automagicaly
+# set VM names.
+#
+######################################################################
+
 # function for simple debugging condition
 # use: qdebug && echo debug message
 function qdebug
@@ -18,11 +29,20 @@ qdebug && \
 qdebug && \
 	exec 2>/tmp/debug-$$.log
 
+######################################################################
+# CONFIGURATION
+######################################################################
+
+# command to "connect" to the one db
 DB="sqlite3 /var/lib/one/one.db"
 
 # select source for detecting new name
 # possible values: template / osvolume
 newname_source=template
+
+######################################################################
+# END CONFIGURATION
+######################################################################
 
 # function for running db queries
 # use: dbq "dome sql query;"
