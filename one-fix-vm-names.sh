@@ -7,7 +7,14 @@
 #
 # Script operates on all "live" VMs or on one define by argument.
 # The second case is useful for use as a VM_HOOK to automagicaly
-# set VM names.
+# set VM names. Hook sample:
+#
+# M_HOOK = [
+#    name = "fix-vm-name",
+#    on = "CREATE",
+#    command = "/usr/local/bin/one-fix-vm-names.sh",
+#    arguments  = "$VMID"
+# ]
 #
 # Name could be detected from template name or primary os volume name
 #
