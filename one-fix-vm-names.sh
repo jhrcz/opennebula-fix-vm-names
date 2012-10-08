@@ -66,6 +66,10 @@ function dbq
   echo "$1" | $DB
 }
 
+# we need to wait a second to not have the db locked
+# for later operations
+sleep 1
+
 ( if [ -n "$1" ]
 then
 	echo "$1"
