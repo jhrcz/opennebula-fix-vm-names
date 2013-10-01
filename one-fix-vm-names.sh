@@ -21,6 +21,12 @@
 # After script is run, it's required to restart oned daemon,
 # to not have old vm name cached.
 #
+# Requires password-less login to mysql, db opennebula and user opennebula.
+# Password for db user could configured with in ~oneadmin/.my.cnf:
+# [mysql]
+# user=opennebula
+# password=XXXX
+#
 ######################################################################
 
 # function for simple debugging condition
@@ -46,7 +52,8 @@ qdebug && \
 ######################################################################
 
 # command to "connect" to the one db
-DB="sqlite3 /var/lib/one/one.db"
+#DB="sqlite3 /var/lib/one/one.db"
+DB="mysql -N -u opennebula opennebula"
 
 # select source for detecting new name
 # possible values: template / osvolume
